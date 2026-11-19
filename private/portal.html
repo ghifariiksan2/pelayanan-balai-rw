@@ -919,11 +919,11 @@ const SVC = [
  {id:"perlinsos",g:"sosial",feat:1,e:"🛡️",t:"Perlinsos Digital: Pendataan Perlindungan Sosial",d:"Pendataan digital agar bantuan sosial tepat sasaran. Bisa daftar mandiri atau dibantu agen Perlinsos.",ch:"Online",tags:"perlinsos perlindungan sosial digital dtsen desil bansos agen ikd pendataan pemutakhiran cek-in warga",
 
   who:["Seluruh keluarga (KK) di Kota Surabaya","Warga yang datanya perlu dicek atau diperbarui agar bantuan sosial tepat sasaran"],
-  bring:["KTP dan Kartu Keluarga","HP dengan IKD yang sudah aktif (untuk daftar mandiri)","Data kondisi keluarga terbaru, misalnya pekerjaan, rumah, dan aset"],
+  bring:["KTP dan Kartu Keluarga","HP dengan IKD yang sudah aktif (untuk daftar mandiri)","Data kondisi keluarga terbaru, misalnya pekerjaan, rumah, dan aset","Nomor ID pelanggan listrik PLN (ada di token atau tagihan listrik)"],
   steps:[["Warga","Pastikan IKD sudah aktif jika ingin daftar mandiri. Belum aktif? Aktivasi bisa dilakukan di Balai RW"],["Warga","Daftar mandiri di perlinsos.kemensos.go.id dengan pilihan Masuk dengan IKD, atau minta bantuan agen Perlinsos"],["Agen Perlinsos","Mendata kondisi keluarga, lalu memasukkan informasinya ke Aplikasi Perlinsos Digital"],["Pemkot Surabaya","Data dicocokkan dengan data berbagai instansi dan dimutakhirkan. Hasilnya memengaruhi pemeringkatan desil dan kelayakan bantuan"]],
 
   notes:[["warn","Perlinsos Digital adalah <b>pendataan dan validasi data</b>. Mendaftar tidak otomatis berarti menerima bantuan."],["","Jadwal dan lokasi pendaftaran bisa berubah. Tanyakan info terbaru ke Kelurahan atau Balai RW."]],
-  links:[["Daftar mandiri Perlinsos ↗","https://perlinsos.kemensos.go.id/"],["Aktivasi IKD","#ikd"],["Cek & sanggah desil","#desil"],["Usulan PKH & BPNT","#pkh"]]},
+  cta:["Daftar mandiri Perlinsos ↗","https://perlinsos.kemensos.go.id/"],links:[["Aktivasi IKD","#ikd"],["Cek & sanggah desil","#desil"],["Usulan PKH & BPNT","#pkh"]]},
  {id:"gamis",g:"sosial",e:"📋",t:"Usulan Data Keluarga Miskin",d:"Mengusulkan keluarga agar masuk data keluarga miskin yang ditetapkan Dinas Sosial.",ch:"Lewat RT/RW",tags:"keluarga miskin gamis pra miskin data dinsos mbr",
   who:["Warga Kota Surabaya yang merasa layak masuk data keluarga miskin"],
   steps:[["Warga","Menyampaikan usulan baru ke RT"],["RT","Meneruskan usulan ke RW"],["RW","Meneruskan usulan ke Kelurahan"],["Kelurahan","Melakukan verifikasi"],["Kecamatan","Melakukan verifikasi"],["Dinas Sosial","Melakukan verifikasi"],["Kelurahan","Membahas data dalam Musyawarah Kelurahan (Muskel), lalu membuat Berita Acara (BA) hasil Muskel"],["Kelurahan","Mengunggah BA melalui aplikasi"],["Dinas Sosial","Menetapkan keluarga miskin"]],
@@ -1175,7 +1175,7 @@ function renderSvc(s){
   $("svcHead").innerHTML = `<div class="eyebrow">${esc(GROUPS.find(g=>g[0]===s.g)[1].replace(/^\S+\s/,""))}</div>
     <h1><span class="e" aria-hidden="true">${s.e}</span> ${esc(s.t)}</h1><p>${esc(s.d)}</p>
     <div class="chips"><span>📍 ${esc(s.ch)}</span>${s.steps?`<span>👣 ${s.steps.length} langkah</span>`:""}</div>`;
-  let h = "", side = "";
+  let h = "", side = ""; if(s.cta) h += `<a class="btn btn-gold" style="display:flex;justify-content:center;width:100%;font-size:19px;padding:20px 22px;margin-bottom:14px" href="${esc(s.cta[1])}" target="_blank" rel="noopener">${esc(s.cta[0])}</a>`;
   if(s.who) h += `<div class="block o1"><h3>🙋 Untuk siapa</h3><ul>${s.who.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
   if(s.cases) side += `<div class="block o2"><h3>🎒 Syarat sesuai keperluan</h3>${s.cases.map(([t,items],ci)=>`<details class="x"${(ci===0||s.allOpen)?" open":""}><summary>${esc(t)}</summary>${items.map((x,i)=>`<label class="check"><input type="checkbox" id="c-${s.id}-${ci}-${i}"><span>${esc(x)}</span></label>`).join("")}</details>`).join("")}</div>`;
   if(s.bring) side +=`<div class="block o2"><h3>🎒 Yang perlu disiapkan</h3>${s.bring.map((x,i)=>`<label class="check"><input type="checkbox" id="b-${s.id}-${i}"><span>${esc(x)}</span></label>`).join("")}
