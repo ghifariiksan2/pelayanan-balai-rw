@@ -920,10 +920,10 @@ const SVC = [
   kv:[["👨‍👩‍👧‍👦 KK terjangkau","1.004.298"],["🧑‍💼 Agen Perlinsos","± 14 ribu"],["🔎 Warga tidak ditemukan","± 219 ribu"],["🕊️ Tercatat meninggal","± 26 ribu"]],kvTitle:"📊 Perlinsos Digital Surabaya dalam angka",kvNote:"Angka dari pemberitaan Oktober 2026 setelah pendataan lapangan 18 Juni–18 Juli 2026. Bisa berubah seiring pemutakhiran.",
   who:["Seluruh keluarga (KK) di Kota Surabaya","Warga yang datanya perlu dicek atau diperbarui agar bantuan sosial tepat sasaran"],
   bring:["KTP dan Kartu Keluarga","HP dengan IKD yang sudah aktif (untuk daftar mandiri)","Data kondisi keluarga terbaru, misalnya pekerjaan, rumah, dan aset"],
-  steps:[["Warga","Pastikan IKD sudah aktif jika ingin daftar mandiri. Belum aktif? Aktivasi bisa dilakukan di Balai RW"],["Warga","Daftar mandiri, atau minta bantuan agen Perlinsos"],["Agen Perlinsos","Mendata kondisi keluarga, lalu memasukkan informasinya ke Aplikasi Perlinsos Digital"],["Pemkot Surabaya","Data dicocokkan dengan data berbagai instansi dan dimutakhirkan. Hasilnya memengaruhi pemeringkatan desil dan kelayakan bantuan"]],
+  steps:[["Warga","Pastikan IKD sudah aktif jika ingin daftar mandiri. Belum aktif? Aktivasi bisa dilakukan di Balai RW"],["Warga","Daftar mandiri di perlinsos.kemensos.go.id dengan pilihan Masuk dengan IKD, atau minta bantuan agen Perlinsos"],["Agen Perlinsos","Mendata kondisi keluarga, lalu memasukkan informasinya ke Aplikasi Perlinsos Digital"],["Pemkot Surabaya","Data dicocokkan dengan data berbagai instansi dan dimutakhirkan. Hasilnya memengaruhi pemeringkatan desil dan kelayakan bantuan"]],
   sections:[["🤝 Siapa agen Perlinsos?",["Sekitar 14 ribu agen: kepala dinas, camat, lurah, ASN pendamping, Ketua RT/RW, TKSK, dan pendamping PKH","Tanyakan ke Ketua RT/RW atau petugas Balai RW siapa agen di wilayah Anda"]],["🔐 Jaga data kependudukan",["Jangan meminjamkan KTP atau NIK sembarangan","Isi data sesuai kondisi sebenarnya, karena dipakai untuk menentukan desil"]]],
   notes:[["warn","Perlinsos Digital adalah <b>pendataan dan validasi data</b>. Mendaftar tidak otomatis berarti menerima bantuan."],["","Jadwal dan lokasi pendaftaran bisa berubah. Tanyakan info terbaru ke Kelurahan atau Balai RW."]],
-  links:[["Aktivasi IKD","#ikd"],["Cek & sanggah desil","#desil"],["Usulan PKH & BPNT","#pkh"]],src:"pemberitaan ANTARA Jatim, Beritajatim, dan Kempalan (Juni–Oktober 2026)"},
+  links:[["Daftar mandiri Perlinsos ↗","https://perlinsos.kemensos.go.id/"],["Aktivasi IKD","#ikd"],["Cek & sanggah desil","#desil"],["Usulan PKH & BPNT","#pkh"]],src:"laman Pemkot Surabaya, ANTARA Jatim, Beritajatim, dan Kempalan (Juni–Oktober 2026)"},
  {id:"gamis",g:"sosial",e:"📋",t:"Usulan Data Keluarga Miskin",d:"Mengusulkan keluarga agar masuk data keluarga miskin yang ditetapkan Dinas Sosial.",ch:"Lewat RT/RW",tags:"keluarga miskin gamis pra miskin data dinsos mbr",
   who:["Warga Kota Surabaya yang merasa layak masuk data keluarga miskin"],
   steps:[["Warga","Menyampaikan usulan baru ke RT"],["RT","Meneruskan usulan ke RW"],["RW","Meneruskan usulan ke Kelurahan"],["Kelurahan","Melakukan verifikasi"],["Kecamatan","Melakukan verifikasi"],["Dinas Sosial","Melakukan verifikasi"],["Kelurahan","Membahas data dalam Musyawarah Kelurahan (Muskel), lalu membuat Berita Acara (BA) hasil Muskel"],["Kelurahan","Mengunggah BA melalui aplikasi"],["Dinas Sosial","Menetapkan keluarga miskin"]],
@@ -1070,7 +1070,7 @@ function renderHome(){
     out.innerHTML = html; return;
   }
   let html = RWCARD;
-  const feats = SVC.filter(s=>s.feat);
+  const feats = SVC.filter(s=>s.feat).sort((a,b)=>(b.id==="perlinsos")-(a.id==="perlinsos"));
   if(feats.length) html += `<section style="--c:#CA8A04"><div class="sec-h"><h2>⭐ Layanan unggulan</h2></div><div class="grid">${feats.map(tileHTML).join("")}</div></section>`;
   html += `<section style="--c:#2563EB"><div class="sec-h"><h2>Telusuri menu</h2></div><div class="grid">${Object.keys(MENU).filter(k=>k!=="bantuan"&&k!=="saran").map(menuTileHTML).join("")}</div></section>`;
   out.innerHTML = html;
@@ -1079,7 +1079,7 @@ function renderHome(){
 $("catnav").innerHTML = GROUPS.map(([g,l])=>`<button type="button" style="${cvars(g)}" data-g="${g}">${esc(l)}</button>`).join("");
 $("catnav").querySelectorAll("button").forEach(b => b.onclick = () => { if($("hq").value){ $("hq").value=""; renderHome(); } const el=$("grp-"+b.dataset.g); if(el) el.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"}); });
 $("cSvc").textContent = SVC.length; $("cSsw").textContent = ALL.length; $("cCat").textContent = GROUPS.length;
-const HQUICK = [["🔎 Cek desil/gamis","cek gamis"],["📝 SKTM","sktm"],["🔐 Akun KNG","kng"],["📲 KTP digital","ikd"],["💒 Nikah","nikah"],["📊 Sanggah desil","desil"],["🆔 KTP hilang","ktp"],["📑 Akta","akta"],["⚖️ Ahli waris","waris"],["🎓 Beasiswa","beasiswa"],["💳 BPJS gratis","bpjs"],["🏚️ Bedah rumah","rutilahu"],["🛒 PKH / BPNT","pkh"],["🏪 NIB","nib"],["🏗️ IMB / PBG","imb"],["🧰 Cari kerja","kerja"]];
+const HQUICK = [["🛡️ Perlinsos","perlinsos"],["🔎 Cek desil/gamis","cek gamis"],["📝 SKTM","sktm"],["🔐 Akun KNG","kng"],["📲 KTP digital","ikd"],["💒 Nikah","nikah"],["📊 Sanggah desil","desil"],["🆔 KTP hilang","ktp"],["📑 Akta","akta"],["⚖️ Ahli waris","waris"],["🎓 Beasiswa","beasiswa"],["💳 BPJS gratis","bpjs"],["🏚️ Bedah rumah","rutilahu"],["🛒 PKH / BPNT","pkh"],["🏪 NIB","nib"],["🏗️ IMB / PBG","imb"],["🧰 Cari kerja","kerja"]];
 $("hquick").innerHTML = HQUICK.map(([l,t])=>`<button type="button" data-t="${t}">${l}</button>`).join("");
 $("hquick").querySelectorAll("button").forEach(b => b.onclick = () => { $("hq").value = b.dataset.t; renderHome(); });
 $("hq").addEventListener("input", renderHome);
