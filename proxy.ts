@@ -4,6 +4,14 @@ import { NextResponse, type NextRequest } from "next/server";
 // Menyegarkan sesi login petugas di setiap permintaan (token Supabase
 // kedaluwarsa tiap jam) dan menjaga /petugas.
 export async function proxy(request: NextRequest) {
+  // Supabase belum diatur: jangan error. Menu petugas tertutup, menu warga tetap jalan.
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    if (request.nextUrl.pathname.startsWith("/petugas")) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+    return NextResponse.next();
+  }
+
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(
@@ -27,12 +35,12 @@ export async function proxy(request: NextRequest) {
 
   const { data } = await supabase.auth.getUser();
 
-  if (!data.user && request.nextUrl.pathname.startsWith("/petugas")) {
+  if (!data.user && (request.nextUrl.pathname.startsWith("/petugas") || request.nextUrl.pathname === "/menunggu")) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
   return response;
 }
 
 export const config = {
-  matcher: ["/petugas/:path*", "/login", "/auth/:path*"],
+  matcher: ["/petugas/:path*", "/login", "/menunggu", "/auth/:path*"],
 };
