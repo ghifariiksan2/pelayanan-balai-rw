@@ -1037,7 +1037,7 @@ const COL = {adminduk:["#2563EB","#E8F0FF","#1E40AF"],surat:["#7C3AED","#F1EAFE"
 const cvars = g => { const [c,cs,cd] = COL[g]||COL.izin; return `--c:${c};--cs:${cs};--cd:${cd}`; };
 
 /* ============ Beranda ============ */
-const RWCARD = `<div class="rwcard"><div class="rwtop"><span class="e">🏘️</span><div><b>Bingung mulai dari mana? Datang ke Balai RW.</b><span>Petugas ASN di sana siap membantu menjawab pertanyaan Anda.</span></div></div><div class="rwfacts"><div><small>📍 Lokasi</small><b>Balai RW di seluruh Kecamatan Wonokromo</b></div><div><small>🕗 Jam layanan</small><b>08.00 – 16.00 WIB</b></div><div><small>💰 Biaya</small><b>Gratis</b></div></div></div>`;
+const RWCARD = "";
 const SVCIDX = SVC.map(s => ({s, h:norm([s.t,s.d,s.tags||"",GROUPS.find(g=>g[0]===s.g)[1]].join(" "))}));
 function tileHTML(s){
   return `<a class="tile${s.feat?" feat":""}" style="${cvars(s.g)}" href="#${s.id}"><span class="e">${s.e}</span><div><b>${esc(s.t)}</b><small>${esc(s.d)}</small><span class="ch">${esc(s.ch)}</span></div></a>`;
