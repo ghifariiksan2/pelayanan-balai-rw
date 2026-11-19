@@ -917,13 +917,13 @@ const SVC = [
   contacts:[["☎️","Bantuan akun Cek Bansos","171","171"],["💬","WhatsApp Kemensos","0887-7171-171","088771711171"],["🌐","Dinas Sosial Kota Surabaya","dinassosial.surabaya.go.id","","https://dinassosial.surabaya.go.id/"]],
   links:[["Cek desil online ↗","https://cekbansos.kemensos.go.id"],["Formulir BPS ↗","https://dtsen-form.bps.go.id"],["Cek status gamis/pramis","#cekstatus"],["Surat Keterangan Desil","#skm"],["Usulan Data Keluarga Miskin","#gamis"]],src:"Infografis Cara Mengusulkan Pemutakhiran Desil DTSEN (Dinas Sosial Kota Surabaya), materi sosialisasi Tingkat Kesejahteraan Menurut Desil, dan pemberitaan ANTARA Jatim September 2026"},
  {id:"perlinsos",g:"sosial",feat:1,e:"🛡️",t:"Perlinsos Digital: Pendataan Perlindungan Sosial",d:"Pendataan digital agar bantuan sosial tepat sasaran. Bisa daftar mandiri atau dibantu agen Perlinsos.",ch:"Online",tags:"perlinsos perlindungan sosial digital dtsen desil bansos agen ikd pendataan pemutakhiran cek-in warga",
-  kv:[["👨‍👩‍👧‍👦 KK terjangkau","1.004.298"],["🧑‍💼 Agen Perlinsos","± 14 ribu"],["🔎 Warga tidak ditemukan","± 219 ribu"],["🕊️ Tercatat meninggal","± 26 ribu"]],kvTitle:"📊 Perlinsos Digital Surabaya dalam angka",kvNote:"Angka dari pemberitaan Oktober 2026 setelah pendataan lapangan 18 Juni–18 Juli 2026. Bisa berubah seiring pemutakhiran.",
+
   who:["Seluruh keluarga (KK) di Kota Surabaya","Warga yang datanya perlu dicek atau diperbarui agar bantuan sosial tepat sasaran"],
   bring:["KTP dan Kartu Keluarga","HP dengan IKD yang sudah aktif (untuk daftar mandiri)","Data kondisi keluarga terbaru, misalnya pekerjaan, rumah, dan aset"],
   steps:[["Warga","Pastikan IKD sudah aktif jika ingin daftar mandiri. Belum aktif? Aktivasi bisa dilakukan di Balai RW"],["Warga","Daftar mandiri di perlinsos.kemensos.go.id dengan pilihan Masuk dengan IKD, atau minta bantuan agen Perlinsos"],["Agen Perlinsos","Mendata kondisi keluarga, lalu memasukkan informasinya ke Aplikasi Perlinsos Digital"],["Pemkot Surabaya","Data dicocokkan dengan data berbagai instansi dan dimutakhirkan. Hasilnya memengaruhi pemeringkatan desil dan kelayakan bantuan"]],
-  sections:[["🤝 Siapa agen Perlinsos?",["Sekitar 14 ribu agen: kepala dinas, camat, lurah, ASN pendamping, Ketua RT/RW, TKSK, dan pendamping PKH","Tanyakan ke Ketua RT/RW atau petugas Balai RW siapa agen di wilayah Anda"]],["🔐 Jaga data kependudukan",["Jangan meminjamkan KTP atau NIK sembarangan","Isi data sesuai kondisi sebenarnya, karena dipakai untuk menentukan desil"]]],
+
   notes:[["warn","Perlinsos Digital adalah <b>pendataan dan validasi data</b>. Mendaftar tidak otomatis berarti menerima bantuan."],["","Jadwal dan lokasi pendaftaran bisa berubah. Tanyakan info terbaru ke Kelurahan atau Balai RW."]],
-  links:[["Daftar mandiri Perlinsos ↗","https://perlinsos.kemensos.go.id/"],["Aktivasi IKD","#ikd"],["Cek & sanggah desil","#desil"],["Usulan PKH & BPNT","#pkh"]],src:"laman Pemkot Surabaya, ANTARA Jatim, Beritajatim, dan Kempalan (Juni–Oktober 2026)"},
+  links:[["Daftar mandiri Perlinsos ↗","https://perlinsos.kemensos.go.id/"],["Aktivasi IKD","#ikd"],["Cek & sanggah desil","#desil"],["Usulan PKH & BPNT","#pkh"]]},
  {id:"gamis",g:"sosial",e:"📋",t:"Usulan Data Keluarga Miskin",d:"Mengusulkan keluarga agar masuk data keluarga miskin yang ditetapkan Dinas Sosial.",ch:"Lewat RT/RW",tags:"keluarga miskin gamis pra miskin data dinsos mbr",
   who:["Warga Kota Surabaya yang merasa layak masuk data keluarga miskin"],
   steps:[["Warga","Menyampaikan usulan baru ke RT"],["RT","Meneruskan usulan ke RW"],["RW","Meneruskan usulan ke Kelurahan"],["Kelurahan","Melakukan verifikasi"],["Kecamatan","Melakukan verifikasi"],["Dinas Sosial","Melakukan verifikasi"],["Kelurahan","Membahas data dalam Musyawarah Kelurahan (Muskel), lalu membuat Berita Acara (BA) hasil Muskel"],["Kelurahan","Mengunggah BA melalui aplikasi"],["Dinas Sosial","Menetapkan keluarga miskin"]],
@@ -1188,7 +1188,7 @@ function renderSvc(s){
   if(s.contacts) side += `<div class="block o6"><h3>☎️ Kontak</h3>${s.contacts.map(([e,l,v,cp,url])=>`<div class="row"><span class="e">${e}</span><div><small>${esc(l)}</small><b>${url?`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(v)}</a>`:esc(v)}</b></div>${cp?`<button class="copy" type="button" data-copy="${esc(cp)}">Salin</button>`:""}</div>`).join("")}</div>`;
   if(s.links) side += `<div class="chips o7" style="margin-top:14px">${s.links.map(linkHTML).join("")}</div>`;
   h += shareHTML(s.id, s.t, "o8");
-  h += `<p class="src-note o8">Sumber: ${esc(s.src)}.</p>`;
+  if(s.src) h += `<p class="src-note o8">Sumber: ${esc(s.src)}.</p>`;
   const body = $("svcBody");
   body.innerHTML = side ? `<div class="dgrid"><div class="dmain">${h}</div><aside class="dside">${side}</aside></div>` : `<div class="dgrid solo"><div class="dmain">${h}</div></div>`;
   wireBoxes(body); bindCopy(body);
