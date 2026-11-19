@@ -787,7 +787,7 @@ const GROUPS = [
 const BALAIRW = "Materi Pelayanan Balai RW, Pemerintah Kota Surabaya";
 const WONO = "Syarat Pelayanan Publik Kecamatan Wonokromo";
 const KEC = "Standar Pelayanan Kecamatan (infografis Sistem, Mekanisme, dan Prosedur)";
-const WONO_CONTACT = [["💬","WhatsApp Kecamatan Wonokromo","0878 8571 4876","087885714876"],["📞","Telepon Kecamatan Wonokromo","031-5621411","0315621411"]];
+const WONO_CONTACT = [["💬","WhatsApp Kecamatan Wonokromo","0878 8571 4876","087885714876","https://wa.me/6287885714876"],["📞","Telepon Kecamatan Wonokromo","031-5621411","0315621411","tel:+62315621411"]];
 const ADM_KV = [["💰 Biaya","Gratis"],["🧾 Yang didapat saat mengajukan","Kitir / tanda terima"]];
 const ADM_NOTE = [["","Syarat ini dari Kecamatan Wonokromo. Kecamatan lain di Surabaya umumnya sama, tapi sebaiknya konfirmasi dulu ke kecamatan tempat Anda tinggal."]];
 const SYARAT = "Daftar Syarat Pelayanan Kelurahan (layanan online mandiri)";
@@ -1229,7 +1229,7 @@ function renderGrup(key){
   const el = $("grupBody");
   if(key==="saran"){ el.innerHTML = saranHTML(); $("fbForm").addEventListener("submit", kirimSaran); return; }
   if(key==="bantuan"){
-    const rows = WONO_CONTACT.map(([e,l,v,cp]) => `<div class="row"><span class="e">${e}</span><div><small>${esc(l)}</small><b>${esc(v)}</b></div><button class="copy" type="button" data-copy="${esc(cp)}">Salin</button></div>`).join("");
+    const rows = WONO_CONTACT.map(([e,l,v,cp,url]) => `<div class="row"><span class="e">${e}</span><div><small>${esc(l)}</small><b>${url?`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(v)}</a>`:esc(v)}</b></div><button class="copy" type="button" data-copy="${esc(cp)}">Salin</button></div>`).join("");
     el.innerHTML = RWCARD + `<div class="block"><h3>☎️ Kontak Kecamatan Wonokromo</h3><div class="contact">${rows}</div></div>`;
     bindCopy(el); return;
   }
