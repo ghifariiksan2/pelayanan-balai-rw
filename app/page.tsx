@@ -7,8 +7,8 @@ export default function Home() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/logo.svg" alt="Logo Pelayanan Balai RW" width={84} height={84} style={{ borderRadius: 22, marginBottom: 14 }} />
         <br />
-        <span className="eyebrow">Kecamatan Wonokromo · Kota Surabaya</span>
-        <h1>Pelayanan Balai RW</h1>
+        <span className="eyebrow">Pemerintah Kota Surabaya</span>
+        <h1>Kecamatan Wonokromo</h1>
         <p>Silakan pilih, Anda masuk sebagai siapa?</p>
       </header>
 
