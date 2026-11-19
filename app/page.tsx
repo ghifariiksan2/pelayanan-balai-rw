@@ -32,9 +32,6 @@ export default function Home() {
         </Link>
       </nav>
 
-      <p className="foot">
-        Website ini dibuat oleh Muhammad Ghifari Iksan, S.Tr.IP., M.A.P.
-      </p>
     </main>
   );
 }
